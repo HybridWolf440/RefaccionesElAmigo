@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoParts MX — Iniciar Sesión</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJBRQTYGZ3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DJBRQTYGZ3');
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Hoja de estilos compartida -->
+  <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    /* ── Estilos exclusivos de la página de Login ── */
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fondo de cuadrícula animada */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: .4;
+      animation: gridPan 20s linear infinite;
+      pointer-events: none;
+    }
+
+    /* Resplandor de acento */
+    body::after {
+      content: '';
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,80,10,.18) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      pointer-events: none;
+    }
+
+    /* Tarjeta de login */
+    .login-card {
+      position: relative; z-index: 2;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 56px 48px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.6);
+      animation: cardIn .6s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    .login-logo {
+      font-family: var(--font-disp);
+      font-size: 2.4rem;
+      letter-spacing: .04em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .login-logo span { color: var(--accent); }
+
+    .login-subtitle {
+      color: var(--muted);
+      font-size: .82rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-size: .78rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .form-group input {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: .95rem;
+      padding: 12px 16px;
+      transition: border-color var(--trans);
+      outline: none;
+    }
+    .form-group input:focus  { border-color: var(--accent); }
+    .form-group input::placeholder { color: var(--muted); }
+
+    .login-btn {
+      width: 100%;
+      background: var(--accent); color: #fff;
+      font-family: var(--font-disp);
+      font-size: 1.1rem; letter-spacing: .14em;
+      padding: 14px; border-radius: var(--radius);
+      transition: background var(--trans), transform var(--trans);
+      margin-top: 8px;
+    }
+    .login-btn:hover { background: #c93d00; transform: translateY(-2px); }
+
+    #login-error {
+      background: rgba(232,80,10,.12);
+      border: 1px solid rgba(232,80,10,.3);
+      color: var(--accent2);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      font-size: .85rem;
+      margin-top: 14px;
+      display: none;
+    }
+
+    .login-hint {
+      color: var(--muted);
+      font-size: .78rem;
+      margin-top: 24px;
+      text-align: center;
+    }
+    .login-hint b { color: var(--accent2); }
+
+    @media(max-width:480px){
+      .login-card { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="login-logo">AUTO<span>PARTS</span> MX</div>
+    <div class="login-subtitle">Sistema de Refacciones Vehiculares</div>
+
+    <div class="form-group">
+      <label for="username">Usuario</label>
+      <input type="text" id="username" placeholder="admin@autoparts.mx" autocomplete="off"/>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" placeholder="••••••••"/>
+    </div>
+
+    <button class="login-btn" onclick="handleLogin()">INGRESAR AL SISTEMA</button>
+    <div id="login-error">⚠ Credenciales incorrectas. Intenta nuevamente.</div>
+
+    <p class="login-hint">Demo: usuario <b>admin</b> / contraseña <b>1234</b></p>
+  </div>
+
+  <!-- Script propio de login -->
+  <script src="auth.js"></script>
+  <script>
+    // Activar Enter para hacer login
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') handleLogin();
+    });
+  </script>
+
+</body>
+</html>

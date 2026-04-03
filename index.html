@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoParts MX — Refacciones Vehiculares</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJBRQTYGZ3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DJBRQTYGZ3');
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Hoja de estilos compartida -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════ -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <div class="nav-logo">AUTO<span>PARTS</span> MX</div>
+
+      <ul class="nav-links">
+        <li><a href="#carrusel">Inicio</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#api-status">API</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="nav-logout" onclick="handleLogout()">Cerrar Sesión ×</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       CARRUSEL — 5 slides, infinito, con controles
+  ═══════════════════════════════════════ -->
+  <section class="carousel-section" id="carrusel">
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carTrack">
+
+        <!-- Slide 1: Motor -->
+        <div class="carousel-slide slide-1 active">
+          <div class="slide-bg-icon">🔧</div>
+          <div class="slide-content">
+            <div class="slide-tag"><span class="tag">Oferta del mes</span></div>
+            <h2 class="slide-title">MOTOR Y<br/><em>TRANSMISIÓN</em></h2>
+            <p class="slide-desc">
+              Piezas originales y aftermarket para los principales fabricantes.
+              Garantía de 12 meses en todos nuestros productos de motor.
+            </p>
+            <a href="#catalogo" class="btn-primary">VER CATÁLOGO</a>
+          </div>
+          <div class="slide-bar"></div>
+        </div>
+
+        <!-- Slide 2: Frenos -->
+        <div class="carousel-slide slide-2">
+          <div class="slide-bg-icon">🛞</div>
+          <div class="slide-content">
+            <div class="slide-tag"><span class="tag">Nuevo stock</span></div>
+            <h2 class="slide-title">SISTEMA DE<br/><em>FRENOS</em></h2>
+            <p class="slide-desc">
+              Balatas, discos y cilindros maestros para más de 2,000 modelos distintos.
+              Seguridad primero en cada kilómetro.
+            </p>
+            <a href="#catalogo" class="btn-primary">VER CATÁLOGO</a>
+          </div>
+          <div class="slide-bar"></div>
+        </div>
+
+        <!-- Slide 3: Eléctrico -->
+        <div class="carousel-slide slide-3">
+          <div class="slide-bg-icon">⚡</div>
+          <div class="slide-content">
+            <div class="slide-tag"><span class="tag">Alta rotación</span></div>
+            <h2 class="slide-title">ELÉCTRICO<br/><em>AUTOMOTRIZ</em></h2>
+            <p class="slide-desc">
+              Alternadores, arrancadores, baterías y cableado.
+              Diagnóstico y compatibilidad por VIN en tiempo real.
+            </p>
+            <a href="#catalogo" class="btn-primary">VER CATÁLOGO</a>
+          </div>
+          <div class="slide-bar"></div>
+        </div>
+
+        <!-- Slide 4: Suspensión -->
+        <div class="carousel-slide slide-4">
+          <div class="slide-bg-icon">🚗</div>
+          <div class="slide-content">
+            <div class="slide-tag"><span class="tag">Envío express</span></div>
+            <h2 class="slide-title">SUSPENSIÓN<br/><em>Y DIRECCIÓN</em></h2>
+            <p class="slide-desc">
+              Amortiguadores, resortes, rótulas y extremos de dirección.
+              Piezas de precisión para un manejo firme y seguro.
+            </p>
+            <a href="#catalogo" class="btn-primary">VER CATÁLOGO</a>
+          </div>
+          <div class="slide-bar"></div>
+        </div>
+
+        <!-- Slide 5: Performance -->
+        <div class="carousel-slide slide-5">
+          <div class="slide-bg-icon">🏁</div>
+          <div class="slide-content">
+            <div class="slide-tag"><span class="tag">Premium</span></div>
+            <h2 class="slide-title">LÍNEA<br/><em>PERFORMANCE</em></h2>
+            <p class="slide-desc">
+              Mejora el rendimiento de tu vehículo con nuestra línea de alto desempeño.
+              Filtros, escapes deportivos y más.
+            </p>
+            <a href="#catalogo" class="btn-primary">VER CATÁLOGO</a>
+          </div>
+          <div class="slide-bar"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Botones anterior / siguiente -->
+    <button class="carousel-ctrl prev" onclick="carMove(-1)">&#8592;</button>
+    <button class="carousel-ctrl next" onclick="carMove(1)">&#8594;</button>
+
+    <!-- Dots de navegación -->
+    <div class="carousel-dots" id="carDots"></div>
+
+    <!-- Contador de slide -->
+    <div class="carousel-counter"><span id="carCurrent">1</span> / 5</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       STATS BAR
+  ═══════════════════════════════════════ -->
+  <div class="stats-bar">
+    <div class="container stats-inner">
+      <div><div class="stat-val">+48K</div><div class="stat-lbl">Refacciones</div></div>
+      <div><div class="stat-val">220+</div><div class="stat-lbl">Marcas</div></div>
+      <div><div class="stat-val">12</div><div class="stat-lbl">Meses garantía</div></div>
+      <div><div class="stat-val">24h</div><div class="stat-lbl">Envío express</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       CATÁLOGO (datos desde API)
+  ═══════════════════════════════════════ -->
+  <section id="catalogo" style="background:var(--bg)">
+    <div class="container">
+      <p class="section-label">Catálogo en línea</p>
+      <h2 class="section-title">Refacciones<br/>Disponibles</h2>
+      <p class="section-sub">Datos obtenidos en tiempo real desde nuestra API de inventario.</p>
+
+      <!-- Badge de estado de API -->
+      <div class="api-status ok" id="apiStatusBadge" style="display:none">
+        <span class="status-dot"></span>
+        <span id="apiStatusText">API Conectada</span>
+      </div>
+
+      <!-- Buscador -->
+      <div class="search-wrap">
+        <input
+          class="search-input"
+          id="searchInput"
+          placeholder="Buscar refacción, marca o SKU…"
+          oninput="filterProducts()"
+        />
+        <button class="search-btn" onclick="filterProducts()">BUSCAR</button>
+      </div>
+
+      <!-- Filtros de categoría -->
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" onclick="setFilter('all',this)">Todos</button>
+        <button class="filter-btn" onclick="setFilter('Motor',this)">Motor</button>
+        <button class="filter-btn" onclick="setFilter('Frenos',this)">Frenos</button>
+        <button class="filter-btn" onclick="setFilter('Eléctrico',this)">Eléctrico</button>
+        <button class="filter-btn" onclick="setFilter('Suspensión',this)">Suspensión</button>
+        <button class="filter-btn" onclick="setFilter('Performance',this)">Performance</button>
+      </div>
+
+      <!-- Spinner mientras carga -->
+      <div id="loadingProducts" class="loading-wrap">
+        <div class="spinner"></div>
+        Cargando inventario…
+      </div>
+
+      <!-- Grid de productos -->
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ESTADO DE LA API
+  ═══════════════════════════════════════ -->
+  <section id="api-status" style="background:var(--surface)">
+    <div class="container">
+      <p class="section-label">Integración</p>
+      <h2 class="section-title">Estado de la API</h2>
+      <p class="section-sub">Monitoreo del servicio de inventario en tiempo real.</p>
+
+      <div class="api-info-box">
+        <div class="api-info-box-header">
+          <div class="api-info-title">Inventario de Refacciones</div>
+          <div class="api-status ok" style="margin:0">
+            <span class="status-dot"></span> Operativa
+          </div>
+        </div>
+        <div class="api-info-body">
+          <div>Endpoint: <span>https://dummyjson.com/products</span></div>
+          <div>Método: <span>GET</span></div>
+          <div>Formato: <span>JSON</span></div>
+          <div>Última consulta: <span id="lastFetchTime">—</span></div>
+          <div>Registros cargados: <span id="totalRecords">—</span></div>
+        </div>
+        <button
+          class="btn-primary"
+          style="margin-top:20px;font-size:.85rem;padding:10px 24px"
+          onclick="fetchProducts()">
+          ↻ RECARGAR DATOS
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       NOSOTROS / FEATURES
+  ═══════════════════════════════════════ -->
+  <section id="nosotros" style="background:var(--bg)">
+    <div class="container">
+      <p class="section-label">¿Por qué elegirnos?</p>
+      <h2 class="section-title">Servicio de<br/>Calidad</h2>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <div class="feature-title">BÚSQUEDA POR VIN</div>
+          <div class="feature-desc">
+            Encuentra refacciones compatibles al 100% con tu vehículo
+            ingresando el número VIN.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚚</div>
+          <div class="feature-title">ENVÍO EXPRESS</div>
+          <div class="feature-desc">
+            Entrega en 24 hrs para Ciudad Juárez y Chihuahua.
+            Envíos a todo México en 3–5 días.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✅</div>
+          <div class="feature-title">GARANTÍA 12 MESES</div>
+          <div class="feature-desc">
+            Todas nuestras refacciones cuentan con garantía de un año
+            contra defectos de fabricación.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <div class="feature-title">ASESORÍA TÉCNICA</div>
+          <div class="feature-desc">
+            Técnicos certificados disponibles para orientarte
+            en la selección e instalación de piezas.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">AUTO<span>PARTS</span> MX</div>
+      <p class="footer-copy">© 2026 AutoParts MX — Todos los derechos reservados</p>
+      <ul class="footer-links">
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ── -->
+  <script src="auth.js"></script>
+  <script src="carousel.js"></script>
+  <script src="api.js"></script>
+  <script>
+    // Proteger la página: redirige a login si no hay sesión
+    requireAuth();
+
+    // Inicializar componentes al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      initCarousel();
+      fetchProducts();
+    });
+  </script>
+
+</body>
+</html>
